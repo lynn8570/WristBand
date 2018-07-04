@@ -38,7 +38,6 @@ public class SliderPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        Log.i("linlian", "view =" + view + " object=" + object);
         return view == object;
     }
 

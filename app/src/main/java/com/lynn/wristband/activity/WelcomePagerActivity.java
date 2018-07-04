@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import com.lynn.wristband.R;
 import com.lynn.wristband.adapter.SliderPagerAdapter;
 import com.lynn.wristband.base.FullScreenBaseActivity;
+import com.lynn.wristband.view.SliderViewPagerIndicator;
 
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class WelcomePagerActivity extends FullScreenBaseActivity {
     ViewPager mViewPager;
     @BindView(R.id.enter_button)
     Button mEnterButton;
+    @BindView(R.id.indicator_pager)
+    SliderViewPagerIndicator mIndicator;
 
 
     @Override
@@ -68,6 +71,7 @@ public class WelcomePagerActivity extends FullScreenBaseActivity {
 
             }
         });
+        mIndicator.setViewPager(mViewPager);
     }
 
 }

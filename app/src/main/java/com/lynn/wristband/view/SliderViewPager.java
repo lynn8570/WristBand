@@ -15,7 +15,8 @@ import android.view.View;
 public class SliderViewPager extends ViewPager {
 
     public SliderViewPager(@NonNull Context context) {
-        super(context);
+
+        this(context, null);
     }
 
     public SliderViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
