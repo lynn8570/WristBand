@@ -21,9 +21,9 @@ import com.lynn.wristband.R;
 public class SliderViewPagerIndicator extends View implements ViewPager.OnPageChangeListener {
 
     public static final int INDICATOR_PADDING = 10;
-    public static final int TEXT_PADDING_WIDTH = 4;
     public static final int TEXT_SIZE_WIDTH = 28;
     public static final int LINE_STROKE_WIDTH = 4;
+    public static final int TEXT_BASE_LINE = 2;
     private int indicatorColor;
     private int foregroundColor;
     private Paint mIndicatorPaint;
@@ -84,7 +84,7 @@ public class SliderViewPagerIndicator extends View implements ViewPager.OnPageCh
 
     private void calculateSizeByRadius(int indicatorRadius) {
         Log.i("linlian", "calculateSizeByRadius calculateSizeByRadius =" + indicatorRadius);
-        mWidth = INDICATOR_PADDING * 2 + indicatorRadius * 2 * getCount() + indicatorRadius * (getCount() - 1)*2;
+        mWidth = INDICATOR_PADDING * 2 + indicatorRadius * 2 * getCount() + indicatorRadius * (getCount() - 1) * 2;
         mHeight = INDICATOR_PADDING * 2 + indicatorRadius * 2;
         Log.i("linlian", "calculateSizeByRadius calculateSizeByRadius =" + mWidth + " mheight=" + mHeight);
     }
@@ -166,7 +166,7 @@ public class SliderViewPagerIndicator extends View implements ViewPager.OnPageCh
                 drawCircle(canvas, startX + radius, radius + INDICATOR_PADDING + LINE_STROKE_WIDTH, radius, mCurIndicatorPaint);
                 drawText(canvas, startX, i + 1, mCurTextPaint);
             } else {
-                drawCircle(canvas, startX + radius, radius + INDICATOR_PADDING + LINE_STROKE_WIDTH, radius, mIndicatorPaint);
+                drawCircle(canvas, startX + radius , radius + INDICATOR_PADDING + LINE_STROKE_WIDTH, radius, mIndicatorPaint);
                 drawText(canvas, startX, i + 1, mTextPaint);
             }
 
@@ -190,7 +190,7 @@ public class SliderViewPagerIndicator extends View implements ViewPager.OnPageCh
     private void drawText(Canvas canvas, int startX, int count, Paint paint) {
         if (canvas != null) {
             canvas.drawText(String.valueOf(count), startX + LINE_STROKE_WIDTH + radius - TEXT_SIZE_WIDTH / 2,
-                    INDICATOR_PADDING + radius + TEXT_SIZE_WIDTH / 4 + LINE_STROKE_WIDTH, paint);
+                    INDICATOR_PADDING + radius + LINE_STROKE_WIDTH + TEXT_SIZE_WIDTH / 4 + TEXT_BASE_LINE, paint);
         }
     }
 
