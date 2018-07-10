@@ -1,6 +1,7 @@
 package com.lynn.wristband.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -19,10 +20,10 @@ import com.lynn.wristband.R;
 
 public class SliderViewPagerIndicator extends View implements ViewPager.OnPageChangeListener {
 
-    public static final int CIRCLE_PADDING_WIDTH = 10;
+    public static final int INDICATOR_PADDING = 10;
     public static final int TEXT_PADDING_WIDTH = 4;
     public static final int TEXT_SIZE_WIDTH = 28;
-    public static final int LINEA_STROKE_WIDTH = 4;
+    public static final int LINE_STROKE_WIDTH = 4;
     private int indicatorColor;
     private int foregroundColor;
     private Paint mIndicatorPaint;
@@ -32,12 +33,10 @@ public class SliderViewPagerIndicator extends View implements ViewPager.OnPageCh
     private Paint mLinePaint;
 
     private ViewPager mViewPager;
-
-
     private int radius = 10;
-    private int textBaseLine = 10;
-
     private int mCurPosition = 0;
+    private int mWidth;
+    private int mHeight;
 
     public SliderViewPagerIndicator(Context context) {
 
@@ -57,16 +56,56 @@ public class SliderViewPagerIndicator extends View implements ViewPager.OnPageCh
     private void init(Context context, AttributeSet attributeSet, int defStyleAttr) {
 
         Log.i("linlian", "init()");
-        initAttr(context);
+        initAttr(context, attributeSet);
         initPaints();
     }
+
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+        Log.i("linlian", "onMeasure widthMode =" + widthMode + " width=" + width);
+        Log.i("linlian", "onMeasure heightMode =" + heightMode + " height=" + height);
+        if (widthMode == MeasureSpec.AT_MOST && heightMode == MeasureSpec.AT_MOST) {
+            //if size was set to wrap_content
+            calculateSizeByRadius(radius);
+            setMeasuredDimension(mWidth, mHeight);
+        } else if (widthMode == MeasureSpec.EXACTLY) {
+            calculateRadiusByWidth(width);
+        }
+
+
+    }
+
+    private void calculateSizeByRadius(int indicatorRadius) {
+        Log.i("linlian", "calculateSizeByRadius calculateSizeByRadius =" + indicatorRadius);
+        mWidth = INDICATOR_PADDING * 2 + indicatorRadius * 2 * getCount() + indicatorRadius * (getCount() - 1)*2;
+        mHeight = INDICATOR_PADDING * 2 + indicatorRadius * 2;
+        Log.i("linlian", "calculateSizeByRadius calculateSizeByRadius =" + mWidth + " mheight=" + mHeight);
+    }
+
+    private void calculateRadiusByWidth(int width) {
+        int count = getCount();
+        if (count != 0) {
+            radius = ((width - INDICATOR_PADDING * 2 - count * LINE_STROKE_WIDTH * 2) / (count * 4 - 2));
+        }
+        int calculateTestWidth = INDICATOR_PADDING * 2 + count * 2 * radius + (count - 1) * 2 * radius + LINE_STROKE_WIDTH * count * 2;
+
+        Log.i("linlian", "radius =" + radius);
+        Log.i("linlian", "calculateTestWidth =" + calculateTestWidth);
+    }
+
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         Log.i("linlian", "changed=" + changed + " left=" + left
                 + " top" + top + " right=" + right + " bottom=" + bottom);
         super.onLayout(changed, left, top, right, bottom);
-        getRadius();
     }
 
     public void setViewPager(ViewPager view) {
@@ -84,10 +123,14 @@ public class SliderViewPagerIndicator extends View implements ViewPager.OnPageCh
 
     }
 
-    private void initAttr(Context context) {
-        indicatorColor = context.getResources().getColor(R.color.colorPrimary);
-        foregroundColor = context.getResources().getColor(R.color.colorWhite);
-
+    private void initAttr(Context context, AttributeSet attributeSet) {
+        TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.SliderViewPagerIndicator);
+        indicatorColor = getResources().getColor(R.color.colorPrimary);
+        foregroundColor = getResources().getColor(R.color.colorWhite);
+        indicatorColor = typedArray.getColor(R.styleable.SliderViewPagerIndicator_indicatorColor, indicatorColor);
+        foregroundColor = typedArray.getColor(R.styleable.SliderViewPagerIndicator_textColor, foregroundColor);
+        radius = (int) typedArray.getDimension(R.styleable.SliderViewPagerIndicator_indicatorRadius, 10);
+        typedArray.recycle();
     }
 
     @Override
@@ -95,7 +138,8 @@ public class SliderViewPagerIndicator extends View implements ViewPager.OnPageCh
         super.onSizeChanged(w, h, oldw, oldh);
         Log.i("linlian", "onSizeChanged w=" + w + " h=" + h);
 
-        getRadius();
+        Log.i("linlian", "onSizeChanged ", new RuntimeException());
+
     }
 
     @Override
@@ -104,25 +148,25 @@ public class SliderViewPagerIndicator extends View implements ViewPager.OnPageCh
 
         Log.i("linlian", "onDraw width=" + getWidth());
         Log.i("linlian", "onDraw height=" + getHeight());
-
         drawIndicator(canvas);
     }
 
     private void drawIndicator(Canvas canvas) {
 
+
         int count = getCount();
         if (count == 0) return;
         Log.i("linlian", "count =" + getCount());
 
-        int startX = CIRCLE_PADDING_WIDTH;
+        int startX = INDICATOR_PADDING;
         Log.i("linlian", "startX =" + startX);
         Log.i("linlian", "getTop() =" + getTop());
         for (int i = 0; i < count; i++) {
             if (i == mCurPosition) {
-                drawCircle(canvas, startX + radius, radius, radius, mCurIndicatorPaint);
+                drawCircle(canvas, startX + radius, radius + INDICATOR_PADDING + LINE_STROKE_WIDTH, radius, mCurIndicatorPaint);
                 drawText(canvas, startX, i + 1, mCurTextPaint);
             } else {
-                drawCircle(canvas, startX + radius, radius, radius, mIndicatorPaint);
+                drawCircle(canvas, startX + radius, radius + INDICATOR_PADDING + LINE_STROKE_WIDTH, radius, mIndicatorPaint);
                 drawText(canvas, startX, i + 1, mTextPaint);
             }
 
@@ -135,16 +179,6 @@ public class SliderViewPagerIndicator extends View implements ViewPager.OnPageCh
         }
     }
 
-    private void getRadius() {
-        int count = getCount();
-        if (count != 0) {
-            radius = ((getWidth() - CIRCLE_PADDING_WIDTH * 2) / count * 2 - 1) / 2;
-            radius = getHeight() / 2 > radius ? radius : getHeight() / 2;
-        }
-        textBaseLine = radius - TEXT_SIZE_WIDTH / 2 + TEXT_PADDING_WIDTH;
-        Log.i("linlian", "radius =" + radius);
-        Log.i("linlian", "textBaseLine =" + textBaseLine);
-    }
 
     private int getCount() {
         if (mViewPager == null) return 0;
@@ -155,7 +189,8 @@ public class SliderViewPagerIndicator extends View implements ViewPager.OnPageCh
 
     private void drawText(Canvas canvas, int startX, int count, Paint paint) {
         if (canvas != null) {
-            canvas.drawText(String.valueOf(count), startX + textBaseLine, radius * 2 - textBaseLine, paint);
+            canvas.drawText(String.valueOf(count), startX + LINE_STROKE_WIDTH + radius - TEXT_SIZE_WIDTH / 2,
+                    INDICATOR_PADDING + radius + TEXT_SIZE_WIDTH / 4 + LINE_STROKE_WIDTH, paint);
         }
     }
 
@@ -193,20 +228,20 @@ public class SliderViewPagerIndicator extends View implements ViewPager.OnPageCh
         mIndicatorPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         mIndicatorPaint.setColor(indicatorColor);
         mIndicatorPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        mIndicatorPaint.setStrokeWidth(LINEA_STROKE_WIDTH);
+        mIndicatorPaint.setStrokeWidth(LINE_STROKE_WIDTH);
 
         mCurIndicatorPaint = new Paint();
         mCurIndicatorPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         mCurIndicatorPaint.setColor(indicatorColor);
         mCurIndicatorPaint.setStyle(Paint.Style.STROKE);
-        mCurIndicatorPaint.setStrokeWidth(LINEA_STROKE_WIDTH);
+        mCurIndicatorPaint.setStrokeWidth(LINE_STROKE_WIDTH);
 
 
         mLinePaint = new Paint();
         mLinePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         mLinePaint.setColor(indicatorColor);
         mLinePaint.setStyle(Paint.Style.STROKE);
-        mLinePaint.setStrokeWidth(LINEA_STROKE_WIDTH);
+        mLinePaint.setStrokeWidth(LINE_STROKE_WIDTH);
 
     }
 

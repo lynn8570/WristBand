@@ -2,6 +2,7 @@ package com.lynn.wristband.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 
 import com.lynn.wristband.R;
 
