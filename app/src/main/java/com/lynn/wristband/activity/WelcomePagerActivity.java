@@ -40,6 +40,14 @@ public class WelcomePagerActivity extends FullScreenBaseActivity {
         ButterKnife.bind(this);
 
         initViewPager();
+
+        mEnterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent startMainActivity = new Intent(WelcomePagerActivity.this, MainActivity.class);
+                startActivity(startMainActivity);
+            }
+        });
     }
 
     @Override
