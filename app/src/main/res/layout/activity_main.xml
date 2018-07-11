@@ -23,19 +23,19 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <RadioButton
-            android:id="@+id/rb_home"
+            android:id="@+id/rb_status"
             style="@style/MainButtonStyle"
             android:drawableTop="@drawable/radio_status"
             android:text="状态" />
 
         <RadioButton
-            android:id="@+id/rb_type"
+            android:id="@+id/rb_exercise"
             style="@style/MainButtonStyle"
             android:drawableTop="@drawable/radio_excercise"
             android:text="锻炼" />
 
         <RadioButton
-            android:id="@+id/rb_community"
+            android:id="@+id/rb_settings"
             style="@style/MainButtonStyle"
             android:drawableTop="@drawable/radio_my"
             android:paddingTop="10dp"
