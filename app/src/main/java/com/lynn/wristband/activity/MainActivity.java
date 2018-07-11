@@ -5,12 +5,18 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 
 import com.lynn.wristband.R;
+import com.lynn.wristband.base.FullScreenBaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FullScreenBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
     }
 }

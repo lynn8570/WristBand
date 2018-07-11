@@ -1,5 +1,6 @@
 package com.lynn.wristband.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -46,6 +47,7 @@ public class WelcomePagerActivity extends FullScreenBaseActivity {
             public void onClick(View v) {
                 Intent startMainActivity = new Intent(WelcomePagerActivity.this, MainActivity.class);
                 startActivity(startMainActivity);
+                WelcomePagerActivity.this.finish();
             }
         });
     }

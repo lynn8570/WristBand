@@ -5,14 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.lynn.wristband.activity.MainActivity">
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/home_bottom_bg"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <RadioButton
+            android:id="@+id/rb_home"
+            style="@style/MainButtonStyle"
+            android:drawableTop="@drawable/radio_status"
+            android:text="状态" />
+
+        <RadioButton
+            android:id="@+id/rb_type"
+            style="@style/MainButtonStyle"
+            android:drawableTop="@drawable/radio_excercise"
+            android:text="锻炼" />
+
+        <RadioButton
+            android:id="@+id/rb_community"
+            style="@style/MainButtonStyle"
+            android:drawableTop="@drawable/radio_my"
+            android:paddingTop="10dp"
+            android:text="我的" />
+
+    </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>
