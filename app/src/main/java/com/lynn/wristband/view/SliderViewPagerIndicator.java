@@ -21,7 +21,7 @@ import com.lynn.wristband.R;
 public class SliderViewPagerIndicator extends View implements ViewPager.OnPageChangeListener {
 
     public static final int INDICATOR_PADDING = 10;
-    public static final int TEXT_SIZE_WIDTH = 28;
+    public static final int TEXT_SIZE_WIDTH = 22;
     public static final int LINE_STROKE_WIDTH = 4;
     public static final int TEXT_BASE_LINE = 2;
     private int indicatorColor;
@@ -205,7 +205,7 @@ public class SliderViewPagerIndicator extends View implements ViewPager.OnPageCh
     private void drawLine(Canvas canvas, float startX, float stopX,
                           Paint paint) {
         if (canvas != null) {
-            canvas.drawLine(startX, getHeight() / 2, stopX, getHeight() / 2, paint);
+            canvas.drawLine(startX, radius + INDICATOR_PADDING + LINE_STROKE_WIDTH, stopX, radius + INDICATOR_PADDING + LINE_STROKE_WIDTH, paint);
         }
     }
 
