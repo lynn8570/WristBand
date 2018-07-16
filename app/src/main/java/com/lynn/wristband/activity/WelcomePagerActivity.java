@@ -1,25 +1,15 @@
 package com.lynn.wristband.activity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.lynn.wristband.R;
-import com.lynn.wristband.adapter.SliderPagerAdapter;
+import com.lynn.wristband.adapter.WelcomePagerAdapter;
 import com.lynn.wristband.base.FullScreenBaseActivity;
 import com.lynn.wristband.view.SliderViewPagerIndicator;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,7 +49,7 @@ public class WelcomePagerActivity extends FullScreenBaseActivity {
 
 
     private void initViewPager() {
-        mViewPager.setAdapter(new SliderPagerAdapter(this));
+        mViewPager.setAdapter(new WelcomePagerAdapter(this));
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

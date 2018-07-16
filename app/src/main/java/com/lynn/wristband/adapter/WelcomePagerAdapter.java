@@ -22,18 +22,18 @@ import java.util.List;
  * Created by zowee-laisc on 2018/7/2.
  */
 
-public class SliderPagerAdapter extends PagerAdapter {
+public class WelcomePagerAdapter extends PagerAdapter {
     private List<View> mList;
     private Context mContext;
 
-    public SliderPagerAdapter(Context context) {
+    public WelcomePagerAdapter(Context context) {
         this.mContext = context;
         initViewList();
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return mList.size();
     }
 
     @Override
@@ -58,11 +58,11 @@ public class SliderPagerAdapter extends PagerAdapter {
 
         for (int i = 0; i < 3; i++) {
             ImageView imageView = new ImageView(mContext);
-            if(i==0){
+            if (i == 0) {
                 imageView.setImageResource(R.drawable.cat);
-            }else if(i==1){
+            } else if (i == 1) {
                 imageView.setImageResource(R.drawable.cat2);
-            }else {
+            } else {
                 imageView.setImageResource(R.drawable.ghost);
             }
 
