@@ -62,13 +62,12 @@ public class RegisterPagerAdapter extends PagerAdapter {
                 inflater.inflate(R.layout.register_gender, linearLayout, true);
                 mList.add(linearLayout);
             } else if (i == 1) {
-                inflater.inflate(R.layout.register_birth,linearLayout,true);
+                inflater.inflate(R.layout.register_birth, linearLayout, true);
                 mList.add(linearLayout);
-            } else if(i==2) {
-                imageView.setImageResource(R.drawable.ghost);
-                mList.add(imageView);
-            }
-            else{
+            } else if (i == 2) {
+                inflater.inflate(R.layout.register_stature, linearLayout, true);
+                mList.add(linearLayout);
+            } else {
                 imageView.setImageResource(R.drawable.cat);
                 mList.add(imageView);
             }
