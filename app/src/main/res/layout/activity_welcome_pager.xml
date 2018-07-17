@@ -15,12 +15,11 @@
 
     <Button
         android:id="@+id/enter_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
         android:layout_marginBottom="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/btn_enter"
+        android:background="@drawable/btn_shape_blue"
+        style="@style/NextButtonStyle"
+        android:text="进入首页"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

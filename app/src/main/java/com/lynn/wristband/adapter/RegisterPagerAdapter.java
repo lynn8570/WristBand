@@ -3,9 +3,12 @@ package com.lynn.wristband.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.lynn.wristband.R;
 
@@ -50,17 +53,23 @@ public class RegisterPagerAdapter extends PagerAdapter {
     private void initViewList() {
         mList = new ArrayList<>();
 
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+
         for (int i = 0; i < 3; i++) {
             ImageView imageView = new ImageView(mContext);
+            LinearLayout linearLayout = new LinearLayout(mContext);
             if (i == 0) {
-                imageView.setImageResource(R.drawable.cat);
+                inflater.inflate(R.layout.register_gender, linearLayout, true);
+                mList.add(linearLayout);
             } else if (i == 1) {
                 imageView.setImageResource(R.drawable.cat2);
+                mList.add(imageView);
             } else {
                 imageView.setImageResource(R.drawable.ghost);
+                mList.add(imageView);
             }
 
-            mList.add(imageView);
+
         }
 
     }
