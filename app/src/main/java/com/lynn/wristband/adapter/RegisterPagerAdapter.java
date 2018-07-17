@@ -55,17 +55,21 @@ public class RegisterPagerAdapter extends PagerAdapter {
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             ImageView imageView = new ImageView(mContext);
             LinearLayout linearLayout = new LinearLayout(mContext);
             if (i == 0) {
                 inflater.inflate(R.layout.register_gender, linearLayout, true);
                 mList.add(linearLayout);
             } else if (i == 1) {
-                imageView.setImageResource(R.drawable.cat2);
-                mList.add(imageView);
-            } else {
+                inflater.inflate(R.layout.register_birth,linearLayout,true);
+                mList.add(linearLayout);
+            } else if(i==2) {
                 imageView.setImageResource(R.drawable.ghost);
+                mList.add(imageView);
+            }
+            else{
+                imageView.setImageResource(R.drawable.cat);
                 mList.add(imageView);
             }
 
@@ -73,5 +77,6 @@ public class RegisterPagerAdapter extends PagerAdapter {
         }
 
     }
+
 
 }
