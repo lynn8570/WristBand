@@ -19,6 +19,12 @@
         <attr name="maxValue" format="float" />
         <attr name="selectorValue" format="float" />
         <attr name="perValue" format="float" />
-        <attr name="rulerTextColor" format="color"/>
+        <attr name="rulerTextColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="TagRulerView">
+        <attr name="lineColor" format="color" />
+        <attr name="lineSpaceWidth" format="dimension" />
+        <attr name="isVertical" format="boolean" />
     </declare-styleable>
 </resources>
