@@ -16,40 +16,54 @@ public class RulerDrawHelper {
     private static final int LINE_WIDTH = 2;
     private static final int LINE_SPACE = 10;
     private static final int RULER_TEXT_SIZE = 20;
+    private static final int CURRENT_RADIUS = 10;
+    private static final int TAG_TEXT_SIZE = 80;
+    private static final int TAG_UNIT_TEXT_SIZE = 28;
 
     private int mPerValue;
     private int mSpaceInEach;
     private Paint mLinePaint;
     private Paint mRulerTextPaint;
+    private Paint mCurPaint;
 
     private boolean isVertical;
 
+    private int mWidth, mHeight;
 
     /**
      * @param width       标尺整体宽
      * @param height      总高
      * @param perValue    每个间隔代表的值 一般为1
      * @param spaceInEach 每个长线之间间隔数，一般为5
-     * @param color       标尺颜色
+     * @param lineColor   标尺颜色
      * @param isVertical  值是否是纵向分布
      */
     public RulerDrawHelper(int width, int height, int perValue, int spaceInEach,
-                           int color, boolean isVertical) {
+                           int lineColor, int primaryColor, boolean isVertical) {
         this.mPerValue = perValue;
         this.mSpaceInEach = spaceInEach;
         this.isVertical = isVertical;
+        this.mHeight = height;
+        this.mWidth = width;
 
         mLinePaint = new Paint();
         mLinePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mLinePaint.setColor(color);
+        mLinePaint.setColor(lineColor);
         mLinePaint.setStyle(Paint.Style.STROKE);
-        mLinePaint.setStrokeWidth(LINE_WIDTH);
+
 
         mRulerTextPaint = new Paint();
         mRulerTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mRulerTextPaint.setColor(color);
+        mRulerTextPaint.setColor(lineColor);
         mRulerTextPaint.setStyle(Paint.Style.STROKE);
         mRulerTextPaint.setTextSize(RULER_TEXT_SIZE);
+
+        mCurPaint = new Paint();
+        mCurPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        mCurPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        mCurPaint.setStrokeWidth(LINE_WIDTH);
+        mCurPaint.setColor(primaryColor);
+        mCurPaint.setTextSize(TAG_TEXT_SIZE);
 
         caculateXY(width, height);
     }
@@ -62,25 +76,56 @@ public class RulerDrawHelper {
     public void caculateXY(int width, int height) {
         if (isVertical) {//线是横线，值纵向分布
             middle = height / 2; //当前值的中心y
-            startLine = width / 4;//line 起始x
+            startLine = width / 2;//line 起始x
             startText = startLine - LINE_LENGTH_SHORT;//标尺值左边偏移一个短线长度
             halfOftotalNumber = (height / 2 - LINE_WIDTH / 2) / (LINE_WIDTH + LINE_SPACE);
         } else {//line 是竖线，值横向分布
             middle = width / 2;
-            startLine = height - height / 4;//从3/4处，从下往上画竖线
+            startLine = height - height / 2;//从3/4处，从下往上画竖线
             startText = startLine + LINE_LENGTH_SHORT;//
             halfOftotalNumber = (width / 2 - LINE_WIDTH / 2) / (LINE_WIDTH + LINE_SPACE);
         }
 
     }
 
-    public void drawRulerVertical(Canvas canvas, int curValue) {
+    public void drawRuler(Canvas canvas, int curValue) {
+        if (isVertical) {
+            drawRulerVertical(canvas, curValue);
+        } else {
+            drawRulerHorizontal(canvas, curValue);
+        }
+        drawCurValueCircle(canvas);
+    }
+
+
+    private void drawCurValueCircle(Canvas canvas) {
+        if (isVertical) {
+            canvas.drawLine(startLine, middle, startLine + LINE_LENGTH_LONG, middle, mCurPaint);
+            canvas.drawCircle(startLine + LINE_LENGTH_LONG + CURRENT_RADIUS,
+                    middle, CURRENT_RADIUS, mCurPaint);
+
+        } else {
+            canvas.drawLine(middle, startLine - LINE_LENGTH_LONG, middle, startLine, mCurPaint);
+            canvas.drawCircle(middle, startLine - LINE_LENGTH_LONG - CURRENT_RADIUS, CURRENT_RADIUS,
+                    mCurPaint);
+
+        }
+    }
+
+
+    private void drawRulerVertical(Canvas canvas, int curValue) {
         drawRulerVertical(canvas, startLine, middle, curValue);
     }
 
-    private void drawText(Canvas canvas, int value, int start) {
+    private void drawTextVertical(Canvas canvas, int value, int start) {
         if (isLongLine(value)) {
-            canvas.drawText(String.valueOf(value), startText, start, mRulerTextPaint);
+            canvas.drawText(String.valueOf(value), startText, start + RULER_TEXT_SIZE / 4, mRulerTextPaint);
+        }
+    }
+
+    private void drawTextHorizontal(Canvas canvas, int value, int start) {
+        if (isLongLine(value)) {
+            canvas.drawText(String.valueOf(value), start - RULER_TEXT_SIZE , startText, mRulerTextPaint);
         }
     }
 
@@ -88,7 +133,7 @@ public class RulerDrawHelper {
 
         //中间位置横线
         drawLine(canvas, startX, middleY, getLineLength(curValue), false);
-        drawText(canvas, curValue, middleY);
+        drawTextVertical(canvas, curValue, middleY);
         //画上下
         int pY = 0;//从中间画起，py表示当前画的线 Y的位置
         int tempValue = 0;// 当前画的值
@@ -97,29 +142,29 @@ public class RulerDrawHelper {
             tempValue = curValue - mPerValue * i;
             pY = middleY - LINE_WIDTH / 2 + (LINE_SPACE + LINE_WIDTH) * i;
             drawLine(canvas, startX, pY, getLineLength(tempValue), false);
-            drawText(canvas, tempValue, pY);
+            drawTextVertical(canvas, tempValue, pY);
 
             //往上，值大
             tempValue = curValue + mPerValue * i;
             pY = middleY + LINE_WIDTH / 2 - (LINE_SPACE + LINE_WIDTH) * i;
             drawLine(canvas, startX, pY, getLineLength(tempValue), false);
-            drawText(canvas, tempValue, pY);
+            drawTextVertical(canvas, tempValue, pY);
 
         }
 
     }
 
 
-    public void drawRulerHorizontal(Canvas canvas, int curValue) {
+    private void drawRulerHorizontal(Canvas canvas, int curValue) {
 
         drawRulerHorizontal(canvas, startLine, middle, curValue);
     }
 
     private void drawRulerHorizontal(Canvas canvas, int startY, int middleX, int curValue) {
         //中间位置横线
-        drawLine(canvas, middleX, startY - getLineLength(curValue),
+        drawLine(canvas, middleX, startY,
                 getLineLength(curValue), true);
-        drawText(canvas, curValue, middleX);
+        drawTextHorizontal(canvas, curValue, middleX);
         //画左右
         int pX = 0;//从中间画起，py表示当前画的线 Y的位置
         int tempValue = 0;// 当前画的值
@@ -127,13 +172,13 @@ public class RulerDrawHelper {
             //往左，值小
             tempValue = curValue - mPerValue * i;
             pX = middleX - LINE_WIDTH / 2 + (LINE_SPACE + LINE_WIDTH) * i;
-            drawLine(canvas, pX, startY - getLineLength(curValue), getLineLength(tempValue), true);
-            drawText(canvas, tempValue, pX);
+            drawLine(canvas, pX, startY, getLineLength(tempValue), true);
+            drawTextHorizontal(canvas, tempValue, pX);
             //往右，值大
             tempValue = curValue + mPerValue * i;
             pX = middleX + LINE_WIDTH / 2 - (LINE_SPACE + LINE_WIDTH) * i;
-            drawLine(canvas, pX, startY - getLineLength(curValue), getLineLength(tempValue), true);
-            drawText(canvas, tempValue, pX);
+            drawLine(canvas, pX, startY, getLineLength(tempValue), true);
+            drawTextHorizontal(canvas, tempValue, pX);
         }
 
     }
@@ -151,7 +196,7 @@ public class RulerDrawHelper {
     private void drawLine(Canvas canvas, int startX, int startY, int length, boolean isVertical) {
         Log.i("linlian", "startX =" + startX + " startY=" + startY + " length=" + length);
         if (isVertical) {//竖线
-            canvas.drawLine(startX, startY, startX, startY + length, mLinePaint);
+            canvas.drawLine(startX, startY - length, startX, startY, mLinePaint);
         } else {//横线，
             canvas.drawLine(startX, startY, startX + length, startY, mLinePaint);
         }

@@ -1,6 +1,7 @@
 package com.lynn.wristband.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
@@ -18,18 +19,14 @@ import com.lynn.wristband.utils.RulerDrawHelper;
 
 public class TagRulerView extends View {
 
-
-    private static final int TAG_TEXT_SIZE = 80;
-    private static final int TAG_UNIT_TEXT_SIZE = 28;
-
-
-    private static final int CURRENT_RADIUS = 10;
-
-
     private Paint mTagValuePaint;
     private Paint mTagUnitPaint;
 
     private boolean isVertical = true;
+    private int mCurValue = 170;
+    private int mPerSpaceValue = 1;
+    private int mSpaceInEach = 5;
+    private int mRulerColor;
     private RulerDrawHelper mHelper;
 
 
@@ -39,7 +36,21 @@ public class TagRulerView extends View {
 
     public TagRulerView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+
+        initAttr(context, attrs);
         initPaints();
+    }
+
+    private void initAttr(Context context, AttributeSet attributeSet) {
+        TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.TagRulerView);
+        isVertical = typedArray.getBoolean(R.styleable.TagRulerView_isVertical, true);
+        mCurValue = typedArray.getInteger(R.styleable.TagRulerView_curValue, 170);
+        mPerSpaceValue = typedArray.getInteger(R.styleable.TagRulerView_perSpaceValue, 1);
+        mSpaceInEach = typedArray.getInteger(R.styleable.TagRulerView_spaceInEach, 5);
+        mRulerColor = getResources().getColor(R.color.colorLineGrey);
+        mRulerColor = typedArray.getColor(R.styleable.TagRulerView_rulerColer, mRulerColor);
+
+
     }
 
     @Override
@@ -51,11 +62,7 @@ public class TagRulerView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        if (mHelper == null) {
-            mHelper = new RulerDrawHelper(getWidth(), getHeight(), 1, 5,
-                    getResources().getColor(R.color.colorLineGrey), isVertical);
-
-        }
+        prepareHelper();
         mHelper.caculateXY(getWidth(), getHeight());
 
     }
@@ -63,20 +70,20 @@ public class TagRulerView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (mHelper == null) {
-            mHelper = new RulerDrawHelper(getWidth(), getHeight(), 1, 5,
-                    getResources().getColor(R.color.colorLineGrey), isVertical);
-        }
-
-        if (isVertical) {
-            mHelper.drawRulerVertical(canvas, 170);
-        } else {
-            mHelper.drawRulerHorizontal(canvas, 67);
-        }
+        prepareHelper();
+        mHelper.drawRuler(canvas, mCurValue);
 
 
     }
 
+
+    private void prepareHelper() {
+        if (mHelper == null) {
+            mHelper = new RulerDrawHelper(getWidth(), getHeight(), mPerSpaceValue, mSpaceInEach,
+                    mRulerColor, getResources().getColor(R.color.colorPrimary), isVertical);
+        }
+
+    }
 
     private void initPaints() {
 
@@ -85,13 +92,13 @@ public class TagRulerView extends View {
         mTagValuePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         mTagValuePaint.setColor(getResources().getColor(R.color.colorDark));
         mTagValuePaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        mTagValuePaint.setTextSize(TAG_TEXT_SIZE);
+//        mTagValuePaint.setTextSize(TAG_TEXT_SIZE);
 
         mTagUnitPaint = new Paint();
         mTagUnitPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         mTagUnitPaint.setColor(getResources().getColor(R.color.colorDark));
         mTagUnitPaint.setStyle(Paint.Style.STROKE);
-        mTagUnitPaint.setTextSize(TAG_UNIT_TEXT_SIZE);
+//        mTagUnitPaint.setTextSize(TAG_UNIT_TEXT_SIZE);
 
 
     }

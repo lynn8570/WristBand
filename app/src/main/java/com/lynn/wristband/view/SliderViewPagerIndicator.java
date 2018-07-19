@@ -104,7 +104,7 @@ public class SliderViewPagerIndicator extends View implements ViewPager.OnPageCh
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         Log.i("linlian", "changed=" + changed + " left=" + left
-                + " top" + top + " right=" + right + " bottom=" + bottom);
+                + " top" + top + " right=" + right + " b ottom=" + bottom);
         super.onLayout(changed, left, top, right, bottom);
     }
 

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.lynn.wristband.view.TagRulerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ruler_view_stature"
     android:layout_width="match_parent"
     android:layout_height="300dp"
     android:layout_gravity="center"
-    >
+    app:isVertical="true">
 
 </com.lynn.wristband.view.TagRulerView>
 
