@@ -3,6 +3,7 @@ package com.lynn.wristband.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,26 +55,21 @@ public class RegisterPagerAdapter extends PagerAdapter {
         mList = new ArrayList<>();
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
-
+        View inflate = null;
         for (int i = 0; i < 5; i++) {
-            LinearLayout linearLayout = new LinearLayout(mContext);
             if (i == 0) {
-                inflater.inflate(R.layout.register_gender, linearLayout, true);
-                mList.add(linearLayout);
+                inflate = inflater.inflate(R.layout.register_gender, null, false);
             } else if (i == 1) {
-                inflater.inflate(R.layout.register_birth, linearLayout, true);
-                mList.add(linearLayout);
+                inflate = inflater.inflate(R.layout.register_birth, null, false);
             } else if (i == 2) {
-                inflater.inflate(R.layout.register_stature, linearLayout, true);
-                mList.add(linearLayout);
+                inflate = inflater.inflate(R.layout.register_stature, null, false);
             } else if (i == 3) {
-                inflater.inflate(R.layout.register_weight, linearLayout, true);
-                mList.add(linearLayout);
+                inflate = inflater.inflate(R.layout.register_weight, null, false);
             } else {
-                inflater.inflate(R.layout.register_target, linearLayout, true);
-                mList.add(linearLayout);
+                inflate = inflater.inflate(R.layout.register_target, null, false);
             }
 
+            mList.add(inflate);
 
         }
 

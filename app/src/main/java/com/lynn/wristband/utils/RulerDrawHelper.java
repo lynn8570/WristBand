@@ -125,7 +125,7 @@ public class RulerDrawHelper {
 
     private void drawTextHorizontal(Canvas canvas, int value, int start) {
         if (isLongLine(value)) {
-            canvas.drawText(String.valueOf(value), start - RULER_TEXT_SIZE , startText, mRulerTextPaint);
+            canvas.drawText(String.valueOf(value), start - RULER_TEXT_SIZE, startText, mRulerTextPaint);
         }
     }
 
@@ -153,6 +153,9 @@ public class RulerDrawHelper {
         }
 
     }
+
+
+
 
 
     private void drawRulerHorizontal(Canvas canvas, int curValue) {

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.lynn.wristband.view.NoDayDatePicker xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/date_birth"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:datePickerMode="spinner"
-    android:calendarViewShown="false"
-    android:layout_gravity="center"
-    android:orientation="vertical"
-    android:calendarTextColor="@color/colorPrimary"
-    >
+    android:layout_height="match_parent"
+    android:gravity="center">
 
-</com.lynn.wristband.view.NoDayDatePicker>
+
+    <com.lynn.wristband.view.NoDayDatePicker
+        android:id="@+id/date_birth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:calendarTextColor="@color/colorPrimary"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:orientation="vertical"
+
+        >
+
+    </com.lynn.wristband.view.NoDayDatePicker>
+</LinearLayout>

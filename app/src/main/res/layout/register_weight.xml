@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.lynn.wristband.view.TagRulerView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ruler_view_weight"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:layout_gravity="center"
-    app:isVertical="false">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
-</com.lynn.wristband.view.TagRulerView>
+    <TextView
+        android:id="@+id/c"
+        style="@style/RulerValueTextStyle"
+        android:text="60" />
+
+    <com.lynn.wristband.view.TagRulerView
+        android:id="@+id/ruler_view_weight"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        app:curValue="60"
+        app:isVertical="false">
+
+    </com.lynn.wristband.view.TagRulerView>
+
+</LinearLayout>
 

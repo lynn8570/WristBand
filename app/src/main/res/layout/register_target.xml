@@ -3,27 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/targt_steps"
+        style="@style/RulerValueTextStyle"
+        android:text="170" />
 
     <com.lynn.wristband.view.TagRulerView
 
         android:id="@+id/ruler_view_steps"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_gravity="center"
+        android:layout_height="130dp"
+        android:layout_margin="10dp"
+        app:curValue="7400"
         app:isVertical="false"
-        android:layout_margin="10dp">
+        app:perSpaceValue="200">
 
     </com.lynn.wristband.view.TagRulerView>
+
+    <TextView
+        android:id="@+id/targt_time"
+        style="@style/RulerValueTextStyle"
+        android:text="8" />
 
     <com.lynn.wristband.view.TagRulerView
 
         android:id="@+id/ruler_view_time"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_gravity="center"
-        app:isVertical="false">
+        android:layout_height="130dp"
+        app:isVertical="false"
+        app:perSpaceValue="1"
+        app:spaceInEach="6"
+        app:curValue="8">
 
     </com.lynn.wristband.view.TagRulerView>
 </LinearLayout>
