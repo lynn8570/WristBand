@@ -9,8 +9,8 @@ import android.graphics.Canvas;
 public class DrawVerticalHelper extends DrawHelperBase {
 
 
-    public DrawVerticalHelper(int width, int height, int perValue, int spaceInEach, int lineColor, int primaryColor) {
-        super(width, height, perValue, spaceInEach, lineColor, primaryColor);
+    public DrawVerticalHelper( int perValue, int spaceInEach, int lineColor, int primaryColor) {
+        super( perValue, spaceInEach, lineColor, primaryColor);
     }
 
     @Override

@@ -14,13 +14,13 @@ import android.graphics.Canvas;
 public class DrawHorizontalTimeHelper extends DrawHorizontalHelper {
 
 
-    public DrawHorizontalTimeHelper(int width, int height, int perValue, int spaceInEach, int lineColor, int primaryColor) {
-        super(width, height, perValue, spaceInEach, lineColor, primaryColor);
+    public DrawHorizontalTimeHelper( int perValue, int spaceInEach, int lineColor, int primaryColor) {
+        super( perValue, spaceInEach, lineColor, primaryColor);
     }
 
 
     @Override
-    public void drawText(Canvas canvas, int value, int start) {
+    protected void drawText(Canvas canvas, int value, int start) {
         if (isLongLine(value)) {
             canvas.drawText(String.valueOf(value / 6), start - RULER_TEXT_SIZE / 2, startText, mRulerTextPaint);
         }

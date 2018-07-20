@@ -39,6 +39,7 @@ public class TagRulerView extends View {
         super(context, attrs);
 
         initAttr(context, attrs);
+        prepareHelper();
     }
 
     private void initAttr(Context context, AttributeSet attributeSet) {
@@ -59,39 +60,35 @@ public class TagRulerView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mHelper.calculateXY(getMeasuredWidth(), getMeasuredHeight());
 
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        prepareHelper();
         mHelper.calculateXY(getWidth(), getHeight());
-
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        prepareHelper();
         mHelper.drawRuler(canvas, mCurValue);
-
-
     }
 
 
     private void prepareHelper() {
         if (mHelper == null) {
-            if (isTime ) {
-                mHelper = new DrawHorizontalTimeHelper(getWidth(), getHeight(), mPerSpaceValue, mSpaceInEach,
+            if (isTime) {
+                mHelper = new DrawHorizontalTimeHelper(mPerSpaceValue, mSpaceInEach,
                         mRulerColor, mPrimaryColor);
                 return;
             }
             if (isVertical) {
-                mHelper = new DrawVerticalHelper(getWidth(), getHeight(), mPerSpaceValue, mSpaceInEach,
+                mHelper = new DrawVerticalHelper(mPerSpaceValue, mSpaceInEach,
                         mRulerColor, mPrimaryColor);
             } else {
-                mHelper = new DrawHorizontalHelper(getWidth(), getHeight(), mPerSpaceValue, mSpaceInEach,
+                mHelper = new DrawHorizontalHelper(mPerSpaceValue, mSpaceInEach,
                         mRulerColor, mPrimaryColor);
             }
 

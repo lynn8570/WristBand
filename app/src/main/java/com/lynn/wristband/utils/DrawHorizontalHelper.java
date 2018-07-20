@@ -9,8 +9,8 @@ import android.graphics.Canvas;
 public class DrawHorizontalHelper extends DrawHelperBase {
 
 
-    public DrawHorizontalHelper(int width, int height, int perValue, int spaceInEach, int lineColor, int primaryColor) {
-        super(width, height, perValue, spaceInEach, lineColor, primaryColor);
+    public DrawHorizontalHelper(int perValue, int spaceInEach, int lineColor, int primaryColor) {
+        super( perValue, spaceInEach, lineColor, primaryColor);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class DrawHorizontalHelper extends DrawHelperBase {
         drawText(canvas, curValue, middle);
     }
 
-    public void drawText(Canvas canvas, int value, int start) {
+    protected void drawText(Canvas canvas, int value, int start) {
         if (isLongLine(value)) {
             canvas.drawText(String.valueOf(value), start - RULER_TEXT_SIZE, startText, mRulerTextPaint);
         }

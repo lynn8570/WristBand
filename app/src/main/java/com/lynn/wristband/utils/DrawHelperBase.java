@@ -27,15 +27,14 @@ public abstract class DrawHelperBase implements DrawHelper {
     protected int startText;
     protected int middle;
     protected int halfOftotalNumber;
-    protected int mWidth, mHeight;
 
-    public DrawHelperBase(int width, int height, int perValue, int spaceInEach,
+    public DrawHelperBase( int perValue, int spaceInEach,
                           int lineColor, int primaryColor) {
         this.mPerValue = perValue;
         this.mSpaceInEach = spaceInEach;
 //        this.isVertical = isVertical;
-        this.mHeight = height;
-        this.mWidth = width;
+//        this.mHeight = height;
+//        this.mWidth = width;
 
         mLinePaint = new Paint();
         mLinePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
@@ -56,7 +55,7 @@ public abstract class DrawHelperBase implements DrawHelper {
         mCurPaint.setColor(primaryColor);
         mCurPaint.setTextSize(TAG_TEXT_SIZE);
 
-        calculateXY(width, height);
+
     }
 
     @Override

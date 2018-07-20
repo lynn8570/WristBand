@@ -26,6 +26,7 @@
     <TextView
         android:id="@+id/targt_time"
         style="@style/RulerValueTextStyle"
+        android:textSize="26sp"
         android:text="8小时00分" />
 
     <com.lynn.wristband.view.TagRulerView
