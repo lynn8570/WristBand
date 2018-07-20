@@ -3,14 +3,15 @@ package com.lynn.wristband.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.lynn.wristband.R;
-import com.lynn.wristband.utils.RulerDrawHelper;
+import com.lynn.wristband.utils.DrawHelper;
+import com.lynn.wristband.utils.DrawHorizontalHelper;
+import com.lynn.wristband.utils.DrawHorizontalTimeHelper;
+import com.lynn.wristband.utils.DrawVerticalHelper;
 
 /**
  * Created by zowee-laisc on 2018/7/17.
@@ -19,15 +20,15 @@ import com.lynn.wristband.utils.RulerDrawHelper;
 
 public class TagRulerView extends View {
 
-    private Paint mTagValuePaint;
-    private Paint mTagUnitPaint;
 
     private boolean isVertical = true;
     private int mCurValue = 170;
     private int mPerSpaceValue = 1;
     private int mSpaceInEach = 5;
     private int mRulerColor;
-    private RulerDrawHelper mHelper;
+    private int mPrimaryColor;
+    private boolean isTime = false;
+    private DrawHelper mHelper;
 
 
     public TagRulerView(Context context) {
@@ -38,7 +39,6 @@ public class TagRulerView extends View {
         super(context, attrs);
 
         initAttr(context, attrs);
-        initPaints();
     }
 
     private void initAttr(Context context, AttributeSet attributeSet) {
@@ -47,9 +47,12 @@ public class TagRulerView extends View {
         mCurValue = typedArray.getInteger(R.styleable.TagRulerView_curValue, 170);
         mPerSpaceValue = typedArray.getInteger(R.styleable.TagRulerView_perSpaceValue, 1);
         mSpaceInEach = typedArray.getInteger(R.styleable.TagRulerView_spaceInEach, 5);
-        mRulerColor = getResources().getColor(R.color.colorLineGrey);
-        mRulerColor = typedArray.getColor(R.styleable.TagRulerView_rulerColer, mRulerColor);
-
+        mRulerColor = typedArray.getColor(R.styleable.TagRulerView_rulerColor,
+                getResources().getColor(R.color.colorLineGrey));
+        mPrimaryColor = typedArray.getColor(R.styleable.TagRulerView_primaryColor,
+                getResources().getColor(R.color.colorPrimary));
+        isTime = typedArray.getBoolean(R.styleable.TagRulerView_isTime, false);
+        typedArray.recycle();
 
     }
 
@@ -63,7 +66,7 @@ public class TagRulerView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         prepareHelper();
-        mHelper.caculateXY(getWidth(), getHeight());
+        mHelper.calculateXY(getWidth(), getHeight());
 
     }
 
@@ -79,28 +82,23 @@ public class TagRulerView extends View {
 
     private void prepareHelper() {
         if (mHelper == null) {
-            mHelper = new RulerDrawHelper(getWidth(), getHeight(), mPerSpaceValue, mSpaceInEach,
-                    mRulerColor, getResources().getColor(R.color.colorPrimary), isVertical);
+            if (isTime ) {
+                mHelper = new DrawHorizontalTimeHelper(getWidth(), getHeight(), mPerSpaceValue, mSpaceInEach,
+                        mRulerColor, mPrimaryColor);
+                return;
+            }
+            if (isVertical) {
+                mHelper = new DrawVerticalHelper(getWidth(), getHeight(), mPerSpaceValue, mSpaceInEach,
+                        mRulerColor, mPrimaryColor);
+            } else {
+                mHelper = new DrawHorizontalHelper(getWidth(), getHeight(), mPerSpaceValue, mSpaceInEach,
+                        mRulerColor, mPrimaryColor);
+            }
+
         }
 
     }
 
-    private void initPaints() {
 
-
-        mTagValuePaint = new Paint();
-        mTagValuePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mTagValuePaint.setColor(getResources().getColor(R.color.colorDark));
-        mTagValuePaint.setStyle(Paint.Style.FILL_AND_STROKE);
-//        mTagValuePaint.setTextSize(TAG_TEXT_SIZE);
-
-        mTagUnitPaint = new Paint();
-        mTagUnitPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mTagUnitPaint.setColor(getResources().getColor(R.color.colorDark));
-        mTagUnitPaint.setStyle(Paint.Style.STROKE);
-//        mTagUnitPaint.setTextSize(TAG_UNIT_TEXT_SIZE);
-
-
-    }
 }
 

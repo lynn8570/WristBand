@@ -23,10 +23,12 @@
     </declare-styleable>
 
     <declare-styleable name="TagRulerView">
-        <attr name="rulerColer" format="color" />
+        <attr name="rulerColor" format="color" />
+        <attr name="primaryColor" format="color" />
         <attr name="curValue" format="integer" />
         <attr name="isVertical" format="boolean" />
         <attr name="spaceInEach" format="integer" />
         <attr name="perSpaceValue" format="integer" />
+        <attr name="isTime" format="boolean" />
     </declare-styleable>
 </resources>
