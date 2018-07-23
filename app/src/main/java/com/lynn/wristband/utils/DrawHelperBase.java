@@ -73,13 +73,14 @@ public abstract class DrawHelperBase implements DrawHelper {
         Log.i("linlian", "getOffset mPerValue" + mPerValue + " halfOftotalNumber" + halfOftotalNumber
                 + " middle" + middle);
         offset = middle / (mPerValue * halfOftotalNumber) / 10;
-        return offset;
+        return this.offset;
     }
 
     @Override
     public void setRange(int maxValue, int minValue) {
         this.mMaxValue = maxValue;
         this.mMinValue = minValue;
+
     }
 
     private void drawRuler(Canvas canvas, int start, int middle, int curValue) {

@@ -40,6 +40,8 @@ public class TagRulerView extends View {
     private boolean isTime = false;
     private DrawHelperBase mHelper;
     private RulerView.OnValueChangeListener mListener;
+    private int mLastY, mMove;
+    private int mOffset;
 
     private TextView mCurValueText;
 
@@ -91,6 +93,7 @@ public class TagRulerView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mHelper.calculateXY(getWidth(), getHeight());
+        mOffset = mHelper.getOffset();
     }
 
     @Override
@@ -127,8 +130,6 @@ public class TagRulerView extends View {
         }
     }
 
-    private int mLastY, mMove;
-
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
@@ -138,6 +139,7 @@ public class TagRulerView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.i("linlian", "onTouchEvent ", new RuntimeException());
         int action = event.getAction();
         int position;//
         if (isVertical) {
@@ -156,7 +158,7 @@ public class TagRulerView extends View {
                 break;
             case MotionEvent.ACTION_MOVE:
                 mMove = (mLastY - position);
-                int tempValue = mCurValue + mMove * mHelper.getOffset();
+                int tempValue = mCurValue + mMove * mOffset;
                 setCurValue(tempValue);
                 break;
             case MotionEvent.ACTION_UP:
