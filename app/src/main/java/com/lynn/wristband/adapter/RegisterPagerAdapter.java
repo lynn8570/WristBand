@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.lynn.wristband.R;
+import com.lynn.wristband.view.TagRulerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,17 +65,30 @@ public class RegisterPagerAdapter extends PagerAdapter {
                 inflate = inflater.inflate(R.layout.register_birth, null, false);
             } else if (i == 2) {
                 inflate = inflater.inflate(R.layout.register_stature, null, false);
+                bindRulerAndText(inflate, R.id.ruler_view_stature, R.id.curValue);
             } else if (i == 3) {
                 inflate = inflater.inflate(R.layout.register_weight, null, false);
+                bindRulerAndText(inflate, R.id.ruler_view_weight, R.id.curValue);
             } else {
                 inflate = inflater.inflate(R.layout.register_target, null, false);
+                bindRulerAndText(inflate, R.id.ruler_view_steps, R.id.targt_steps);
+                bindRulerAndText(inflate, R.id.ruler_view_time, R.id.targt_time);
             }
 
             mList.add(inflate);
 
         }
-
     }
 
 
+    /**
+     * @param inflate
+     * @param rulerViewId
+     * @param textViewId
+     */
+    private void bindRulerAndText(View inflate, int rulerViewId, int textViewId) {
+        TagRulerView rulerview = inflate.findViewById(rulerViewId);
+        TextView textView = inflate.findViewById(textViewId);
+        rulerview.setCurValueText(textView);
+    }
 }

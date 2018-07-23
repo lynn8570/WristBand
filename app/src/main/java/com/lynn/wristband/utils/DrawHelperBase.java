@@ -2,6 +2,7 @@ package com.lynn.wristband.utils;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 
 /**
  * Created by zowee-laisc on 2018/7/20.
@@ -27,8 +28,11 @@ public abstract class DrawHelperBase implements DrawHelper {
     protected int startText;
     protected int middle;
     protected int halfOftotalNumber;
+    protected int offset;
 
-    public DrawHelperBase( int perValue, int spaceInEach,
+    protected int mMaxValue, mMinValue;
+
+    public DrawHelperBase(int perValue, int spaceInEach,
                           int lineColor, int primaryColor) {
         this.mPerValue = perValue;
         this.mSpaceInEach = spaceInEach;
@@ -63,6 +67,20 @@ public abstract class DrawHelperBase implements DrawHelper {
         drawRuler(canvas, startLine, middle, curValue);
     }
 
+    @Override
+    public int getOffset() {
+//        (mMinValue - mSelectorValue) / mPerValue * mLineSpaceWidth * 10;
+        Log.i("linlian", "getOffset mPerValue" + mPerValue + " halfOftotalNumber" + halfOftotalNumber
+                + " middle" + middle);
+        offset = middle / (mPerValue * halfOftotalNumber) / 10;
+        return offset;
+    }
+
+    @Override
+    public void setRange(int maxValue, int minValue) {
+        this.mMaxValue = maxValue;
+        this.mMinValue = minValue;
+    }
 
     private void drawRuler(Canvas canvas, int start, int middle, int curValue) {
         //中间位置横线
@@ -111,5 +129,12 @@ public abstract class DrawHelperBase implements DrawHelper {
             return LINE_LENGTH_LONG;
         }
         return LINE_LENGTH_SHORT;
+    }
+
+    public boolean isInRange(int value) {//在范围内
+        if (mMinValue < mMaxValue) {
+            return value >= mMinValue && value <= mMaxValue;
+        }
+        return true;
     }
 }

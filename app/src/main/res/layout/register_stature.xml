@@ -12,7 +12,9 @@
         android:layout_height="300dp"
         android:layout_gravity="center"
         app:curValue="170"
-        app:isVertical="true">
+        app:isVertical="true"
+        app:rulerMaxValue="250"
+        app:rulerMinValue="50">
 
     </com.lynn.wristband.view.TagRulerView>
 

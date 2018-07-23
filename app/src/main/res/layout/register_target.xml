@@ -17,20 +17,20 @@
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_margin="10dp"
-        app:curValue="7400"
         app:isVertical="false"
-        app:perSpaceValue="200">
+        app:perSpaceValue="200"
+        app:rulerMaxValue="7400"
+        app:rulerMinValue="1000">
 
     </com.lynn.wristband.view.TagRulerView>
 
     <TextView
         android:id="@+id/targt_time"
         style="@style/RulerValueTextStyle"
-        android:textSize="26sp"
-        android:text="8小时00分" />
+        android:text="8小时00分"
+        android:textSize="26sp" />
 
     <com.lynn.wristband.view.TagRulerView
-
         android:id="@+id/ruler_view_time"
         android:layout_width="match_parent"
         android:layout_height="130dp"
@@ -38,6 +38,8 @@
         app:isTime="true"
         app:isVertical="false"
         app:perSpaceValue="1"
+        app:rulerMaxValue="144"
+        app:rulerMinValue="0"
         app:spaceInEach="6">
 
     </com.lynn.wristband.view.TagRulerView>

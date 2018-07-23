@@ -10,7 +10,7 @@ public class DrawHorizontalHelper extends DrawHelperBase {
 
 
     public DrawHorizontalHelper(int perValue, int spaceInEach, int lineColor, int primaryColor) {
-        super( perValue, spaceInEach, lineColor, primaryColor);
+        super(perValue, spaceInEach, lineColor, primaryColor);
     }
 
     @Override
@@ -30,6 +30,7 @@ public class DrawHorizontalHelper extends DrawHelperBase {
         startText = startLine + LINE_LENGTH_SHORT;//
         halfOftotalNumber = (width / 2 - LINE_WIDTH / 2) / (LINE_WIDTH + LINE_SPACE);
     }
+
 
     @Override
     protected void drawCurValueCircle(Canvas canvas) {

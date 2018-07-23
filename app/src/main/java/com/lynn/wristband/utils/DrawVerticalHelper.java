@@ -9,8 +9,8 @@ import android.graphics.Canvas;
 public class DrawVerticalHelper extends DrawHelperBase {
 
 
-    public DrawVerticalHelper( int perValue, int spaceInEach, int lineColor, int primaryColor) {
-        super( perValue, spaceInEach, lineColor, primaryColor);
+    public DrawVerticalHelper(int perValue, int spaceInEach, int lineColor, int primaryColor) {
+        super(perValue, spaceInEach, lineColor, primaryColor);
     }
 
     @Override
@@ -38,6 +38,12 @@ public class DrawVerticalHelper extends DrawHelperBase {
         halfOftotalNumber = (height / 2 - LINE_WIDTH / 2) / (LINE_WIDTH + LINE_SPACE);
     }
 
+
+    @Override
+    public int getOffset() {
+        return -super.getOffset();//降序，有个负号
+    }
+
     @Override
     protected void drawRulerLineAt(Canvas canvas, int start, int middle, int curValue) {
         drawLine(canvas, start, middle, getLineLength(curValue));
@@ -45,7 +51,7 @@ public class DrawVerticalHelper extends DrawHelperBase {
     }
 
     private void drawText(Canvas canvas, int value, int start) {
-        if (isLongLine(value)) {
+        if (isLongLine(value) && isInRange(value)) {
             canvas.drawText(String.valueOf(value), startText, start + RULER_TEXT_SIZE / 4, mRulerTextPaint);
         }
     }

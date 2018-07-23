@@ -10,4 +10,8 @@ public interface DrawHelper {
     void calculateXY(int width, int height);
 
     void drawRuler(Canvas canvas, int curValue);
+
+    int getOffset();
+
+    void setRange(int maxValue, int minValue);
 }

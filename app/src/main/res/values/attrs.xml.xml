@@ -29,6 +29,8 @@
         <attr name="isVertical" format="boolean" />
         <attr name="spaceInEach" format="integer" />
         <attr name="perSpaceValue" format="integer" />
+        <attr name="rulerMaxValue" format="integer" />
+        <attr name="rulerMinValue" format="integer" />
         <attr name="isTime" format="boolean" />
     </declare-styleable>
 </resources>
