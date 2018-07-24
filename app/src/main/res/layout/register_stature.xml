@@ -22,5 +22,10 @@
         android:id="@+id/curValue"
         style="@style/RulerValueTextStyle"
         android:text="170" />
+
+    <TextView
+        style="@style/RulerValueUnitStyle"
+        android:paddingTop="10dp"
+        android:text="CM" />
 </LinearLayout>
 

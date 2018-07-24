@@ -6,10 +6,22 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/targt_steps"
-        style="@style/RulerValueTextStyle"
-        android:text="7000" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/targt_steps"
+            style="@style/RulerValueTextStyle"
+            android:drawableLeft="@drawable/ic_register_steps"
+            android:drawablePadding="10dp"
+            android:text="7000" />
+
+        <TextView
+            style="@style/RulerValueUnitStyle"
+            android:paddingTop="10dp"
+            android:text="步" />
+    </LinearLayout>
 
     <com.lynn.wristband.view.TagRulerView
 
@@ -17,9 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_margin="10dp"
+        app:curValue="7400"
         app:isVertical="false"
         app:perSpaceValue="200"
-        app:curValue="7400"
         app:rulerMaxValue="40000"
         app:rulerMinValue="1000">
 
@@ -28,6 +40,8 @@
     <TextView
         android:id="@+id/targt_time"
         style="@style/RulerValueTextStyle"
+        android:drawableLeft="@drawable/ic_register_sleep"
+        android:drawablePadding="10dp"
         android:text="8小时00分"
         android:textSize="26sp" />
 

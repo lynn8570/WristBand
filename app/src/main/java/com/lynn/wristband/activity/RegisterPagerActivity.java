@@ -92,15 +92,19 @@ public class RegisterPagerActivity extends FullScreenBaseActivity {
             @Override
             public void onClick(View v) {
                 if (mPager.getCurrentItem() == 4) {
-                    Intent startMainActivity = new Intent(RegisterPagerActivity.this, MainActivity.class);
-                    startActivity(startMainActivity);
-                    RegisterPagerActivity.this.finish();
+                    startMainActivity();
                 } else {
                     mPager.setCurrentItem(mPager.getCurrentItem() + 1, true);
                 }
 
             }
         });
+    }
+
+    private void startMainActivity() {
+        Intent startMainActivity = new Intent(RegisterPagerActivity.this, MainActivity.class);
+        startActivity(startMainActivity);
+        RegisterPagerActivity.this.finish();
     }
 
     private void updateTitle(int resId) {
