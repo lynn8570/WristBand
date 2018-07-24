@@ -47,7 +47,7 @@ public class DrawHorizontalHelper extends DrawHelperBase {
     }
 
     protected void drawText(Canvas canvas, int value, int start) {
-        if (isLongLine(value)) {
+        if (isLongLine(value) && isInRange(value)) {
             canvas.drawText(String.valueOf(value), start - RULER_TEXT_SIZE, startText, mRulerTextPaint);
         }
     }

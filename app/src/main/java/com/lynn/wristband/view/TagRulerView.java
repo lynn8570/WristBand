@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.Scroller;
 import android.widget.TextView;
 
@@ -39,9 +40,17 @@ public class TagRulerView extends View {
     private int mPrimaryColor;
     private boolean isTime = false;
     private DrawHelperBase mHelper;
-    private RulerView.OnValueChangeListener mListener;
+
+    public OnValueChangeListener getListener() {
+        return mListener;
+    }
+
+    public void setListener(OnValueChangeListener mListener) {
+        this.mListener = mListener;
+    }
+
+    private OnValueChangeListener mListener;
     private int mLastY, mMove;
-    private int mOffset;
 
     private TextView mCurValueText;
 
@@ -93,7 +102,6 @@ public class TagRulerView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mHelper.calculateXY(getWidth(), getHeight());
-        mOffset = mHelper.getOffset();
     }
 
     @Override
@@ -117,9 +125,7 @@ public class TagRulerView extends View {
             if (isTime) {
                 mHelper = new DrawHorizontalTimeHelper(mPerSpaceValue, mSpaceInEach,
                         mRulerColor, mPrimaryColor);
-                return;
-            }
-            if (isVertical) {
+            } else if (isVertical) {
                 mHelper = new DrawVerticalHelper(mPerSpaceValue, mSpaceInEach,
                         mRulerColor, mPrimaryColor);
             } else {
@@ -134,12 +140,22 @@ public class TagRulerView extends View {
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
 
+        requestDisallowInterceptTouchEvent();
         return super.dispatchTouchEvent(event);
+    }
+
+    /**
+     * 阻止父层的View截获touch事件
+     */
+    private void requestDisallowInterceptTouchEvent() {
+        final ViewParent parent = getParent();
+        if (parent != null) {
+            parent.requestDisallowInterceptTouchEvent(true);
+        }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.i("linlian", "onTouchEvent ", new RuntimeException());
         int action = event.getAction();
         int position;//
         if (isVertical) {
@@ -149,7 +165,6 @@ public class TagRulerView extends View {
         }
 
 
-        Log.i("linlian", "onTouchEvent offset=" + mHelper.getOffset());
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 mLastY = position;
@@ -158,7 +173,13 @@ public class TagRulerView extends View {
                 break;
             case MotionEvent.ACTION_MOVE:
                 mMove = (mLastY - position);
-                int tempValue = mCurValue + mMove * mOffset;
+                int tempValue;
+                if (isVertical) {
+                    tempValue = mCurValue - mMove * mPerSpaceValue;
+                } else {
+                    tempValue = mCurValue + mMove * mPerSpaceValue;
+                }
+
                 setCurValue(tempValue);
                 break;
             case MotionEvent.ACTION_UP:
@@ -189,7 +210,7 @@ public class TagRulerView extends View {
      * 滑动后的回调
      */
     public interface OnValueChangeListener {
-        void onValueChange(float value);
+        void onValueChange(int value);
     }
 
     public int getCurValue() {
@@ -201,6 +222,7 @@ public class TagRulerView extends View {
             this.mCurValue = curValue;
             invalidate();
             updateText();
+            notifyValueChange();
         }
 
     }

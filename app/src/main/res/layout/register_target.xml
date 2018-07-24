@@ -19,7 +19,8 @@
         android:layout_margin="10dp"
         app:isVertical="false"
         app:perSpaceValue="200"
-        app:rulerMaxValue="7400"
+        app:curValue="7400"
+        app:rulerMaxValue="40000"
         app:rulerMinValue="1000">
 
     </com.lynn.wristband.view.TagRulerView>

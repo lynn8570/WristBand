@@ -11,7 +11,6 @@ public interface DrawHelper {
 
     void drawRuler(Canvas canvas, int curValue);
 
-    int getOffset();
 
     void setRange(int maxValue, int minValue);
 }

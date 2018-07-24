@@ -28,7 +28,6 @@ public abstract class DrawHelperBase implements DrawHelper {
     protected int startText;
     protected int middle;
     protected int halfOftotalNumber;
-    protected int offset;
 
     protected int mMaxValue, mMinValue;
 
@@ -67,17 +66,11 @@ public abstract class DrawHelperBase implements DrawHelper {
         drawRuler(canvas, startLine, middle, curValue);
     }
 
-    @Override
-    public int getOffset() {
-//        (mMinValue - mSelectorValue) / mPerValue * mLineSpaceWidth * 10;
-        Log.i("linlian", "getOffset mPerValue" + mPerValue + " halfOftotalNumber" + halfOftotalNumber
-                + " middle" + middle);
-        offset = middle / (mPerValue * halfOftotalNumber) / 10;
-        return this.offset;
-    }
+
 
     @Override
     public void setRange(int maxValue, int minValue) {
+        Log.i("linlian","setRange max="+maxValue+" min="+minValue);
         this.mMaxValue = maxValue;
         this.mMinValue = minValue;
 
@@ -133,6 +126,7 @@ public abstract class DrawHelperBase implements DrawHelper {
     }
 
     public boolean isInRange(int value) {//在范围内
+        Log.i("linlian","isInRange value="+value+" min="+mMinValue+"max="+mMaxValue);
         if (mMinValue < mMaxValue) {
             return value >= mMinValue && value <= mMaxValue;
         }

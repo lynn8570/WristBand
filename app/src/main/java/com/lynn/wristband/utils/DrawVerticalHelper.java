@@ -40,11 +40,6 @@ public class DrawVerticalHelper extends DrawHelperBase {
 
 
     @Override
-    public int getOffset() {
-        return -super.getOffset();//降序，有个负号
-    }
-
-    @Override
     protected void drawRulerLineAt(Canvas canvas, int start, int middle, int curValue) {
         drawLine(canvas, start, middle, getLineLength(curValue));
         drawText(canvas, curValue, middle);
