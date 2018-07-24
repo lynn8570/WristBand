@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">WristBand</string>
     <string name="register_name">Your Name</string>
+    <string name="register_gender">Your Gender</string>
+    <string name="register_birth">Your Birth</string>
+    <string name="register_weight">Your weight</string>
+    <string name="register_stature">Your Stature</string>
+    <string name="register_target">Target Settings</string>
+    <string name="register_next">Next</string>
+    <string name="register_finish">Done</string>
+    <string name="register_target_time">%1$2dHou%2$2dMin</string>
 </resources>

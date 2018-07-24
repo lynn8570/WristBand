@@ -72,7 +72,7 @@ public class RegisterPagerAdapter extends PagerAdapter {
             } else {
                 inflate = inflater.inflate(R.layout.register_target, null, false);
                 bindRulerAndText(inflate, R.id.ruler_view_steps, R.id.targt_steps);
-                bindRulerTimeAndText(inflate,R.id.ruler_view_time,R.id.targt_time);
+                bindRulerTimeAndText(inflate, R.id.ruler_view_time, R.id.targt_time);
             }
 
             mList.add(inflate);
@@ -93,10 +93,13 @@ public class RegisterPagerAdapter extends PagerAdapter {
             public void onValueChange(int value) {
                 int hour = value / 6;
                 int minite = value % 6;
-                textView.setText(hour + "小时" + minite * 10 + "分");
+                //格式化输出 补0
+                textView.setText(String.format(mContext.getString(R.string.register_target_time),
+                        hour, minite * 10).replace(' ', '0'));
             }
         });
     }
+
 
     /**
      * @param inflate

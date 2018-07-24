@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">手环</string>
+    <string name="register_gender">您的性别</string>
+    <string name="register_birth">您的生日</string>
+    <string name="register_weight">您的体重</string>
+    <string name="register_stature">您的身高</string>
+    <string name="register_target">设定目标</string>
+    <string name="register_next">下一步</string>
+    <string name="register_finish">完成</string>
+    <string name="register_target_time">%1$2d时%2$2d分</string>
+</resources>
