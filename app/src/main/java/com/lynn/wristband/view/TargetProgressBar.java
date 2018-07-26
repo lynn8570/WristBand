@@ -2,6 +2,7 @@ package com.lynn.wristband.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -16,8 +17,7 @@ public class TargetProgressBar extends View {
 
 
     private Context mContext;
-
-    private Paint mBackPaint, mFrontPaint;
+    private Paint mBackPaint, mFrontPaint, mLinePaint;
     private RectF mRect;
 
     private int mStrokeWidth = 4;
@@ -52,6 +52,12 @@ public class TargetProgressBar extends View {
         mFrontPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         mFrontPaint.setStyle(Paint.Style.STROKE);
         mFrontPaint.setStrokeWidth(mStrokeWidth);
+
+        mLinePaint = new Paint();
+        mLinePaint.setColor(mContext.getResources().getColor(R.color.colorPrimary));
+        mLinePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        mLinePaint.setStyle(Paint.Style.STROKE);
+        mLinePaint.setStrokeWidth(mStrokeWidth / 2);
     }
 
     @Override
@@ -75,18 +81,38 @@ public class TargetProgressBar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        drawCircle(canvas, mBackPaint);
-        drawProgress(canvas, mProgress, mFrontPaint);
+        drawCircle(canvas);
+        drawProgress(canvas, mProgress);
+        drawLines(canvas);
     }
 
-    private void drawProgress(Canvas canvas, int progress, Paint paint) {
+    private void drawProgress(Canvas canvas, int progress) {
         float angle = progress / (float) 100 * 360;
-        canvas.drawArc(mRect, -90, angle, false, paint);
+        canvas.drawArc(mRect, -90, angle, false, mFrontPaint);
 
     }
 
-    private void drawCircle(Canvas canvas, Paint paint) {
-        canvas.drawCircle(getWidth() / 2, getHeight() / 2, mRadius, paint);
+    private void drawCircle(Canvas canvas) {
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, mRadius, mBackPaint);
+    }
+
+    private void drawLines(Canvas canvas) {
+
+        int centerX = getWidth() / 2;
+        int centerY = getHeight() / 2;
+        int radius = mRadius + mStrokeWidth / 2;
+        float max = 360f / 100f * mProgress;
+        for (int i = 0; i < max; i += 3) {
+            double rad = Math.PI - i * Math.PI / 180;
+            float startX = (float) (centerX + (radius - mStrokeWidth) * Math.sin(rad));
+            float startY = (float) (centerY + (radius - mStrokeWidth) * Math.cos(rad));
+
+            float stopX = (float) (centerX + radius * Math.sin(rad) + 1);
+            float stopY = (float) (centerY + radius * Math.cos(rad) + 1);
+
+            canvas.drawLine(startX, startY, stopX, stopY, mLinePaint);
+
+        }
     }
 
     private void initRect() {
