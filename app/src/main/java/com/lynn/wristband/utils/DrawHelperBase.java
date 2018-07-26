@@ -70,7 +70,6 @@ public abstract class DrawHelperBase implements DrawHelper {
 
     @Override
     public void setRange(int maxValue, int minValue) {
-        Log.i("linlian","setRange max="+maxValue+" min="+minValue);
         this.mMaxValue = maxValue;
         this.mMinValue = minValue;
 
@@ -126,7 +125,6 @@ public abstract class DrawHelperBase implements DrawHelper {
     }
 
     public boolean isInRange(int value) {//在范围内
-        Log.i("linlian","isInRange value="+value+" min="+mMinValue+"max="+mMaxValue);
         if (mMinValue < mMaxValue) {
             return value >= mMinValue && value <= mMaxValue;
         }

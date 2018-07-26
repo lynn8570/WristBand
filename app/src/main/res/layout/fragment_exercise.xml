@@ -10,8 +10,9 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/progress_bg_blue"
-            android:layout_gravity="center"/>
+            android:src="@drawable/progress_circle_blue"
+            android:layout_gravity="center"
+            />
 
         <TextView
             android:id="@+id/text_steps"
