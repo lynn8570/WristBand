@@ -5,43 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.lynn.wristband.activity.MainActivity">
+
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-
-    <RadioGroup
-        android:id="@+id/rg_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/home_bottom_bg"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
-
-        <RadioButton
-            android:id="@+id/rb_status"
-            style="@style/MainButtonStyle"
-            android:drawableTop="@drawable/radio_status"
-            android:text="状态" />
-
-        <RadioButton
-            android:id="@+id/rb_exercise"
-            style="@style/MainButtonStyle"
-            android:drawableTop="@drawable/radio_excercise"
-            android:text="锻炼" />
-
-        <RadioButton
-            android:id="@+id/rb_settings"
-            style="@style/MainButtonStyle"
-            android:drawableTop="@drawable/radio_my"
-            android:paddingTop="10dp"
-            android:text="我的" />
-
-    </RadioGroup>
+    <include layout="@layout/radio_group_bottom"></include>
 
 </android.support.constraint.ConstraintLayout>

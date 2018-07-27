@@ -40,6 +40,21 @@ public class MainActivity extends FullScreenBaseActivity {
         ButterKnife.bind(this);
         initFragment();
 
+
+    }
+
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    private void initFragment() {
+        fragments = new ArrayList<>();
+        fragments.add(new StatusFragment());
+        fragments.add(new ExcerciseFragment());
+        fragments.add(new SettingsFragment());
+
         rgMain.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -60,7 +75,6 @@ public class MainActivity extends FullScreenBaseActivity {
         });
 
         rgMain.check(R.id.rb_status);
-
     }
 
     private void switchToFragment(Fragment nextFragment) {
@@ -88,18 +102,6 @@ public class MainActivity extends FullScreenBaseActivity {
             return baseFragment;
         }
         return null;
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_main;
-    }
-
-    private void initFragment() {
-        fragments = new ArrayList<>();
-        fragments.add(new StatusFragment());
-        fragments.add(new ExcerciseFragment());
-        fragments.add(new SettingsFragment());
     }
 
 }
