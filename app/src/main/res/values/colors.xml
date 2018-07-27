@@ -8,4 +8,7 @@
     <color name="colorGrey">#999999</color>
     <color name="colorDark">#444444</color>
     <color name="colorLineGrey">#979797</color>
+    <color name="stepsBlue">#4A90E2</color>
+    <color name="heartsOrange">#F0895D</color>
+    <color name="sleepPurple">#9013FE</color>
 </resources>
