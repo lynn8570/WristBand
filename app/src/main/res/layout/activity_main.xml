@@ -23,21 +23,26 @@
             app:statusBarScrim="@android:color/transparent"
             app:titleEnabled="false">
 
+            <com.lynn.wristband.view.ProgressFrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary">
 
-            <include layout="@layout/fragment_progress_header" />
+            </com.lynn.wristband.view.ProgressFrameLayout>
+
             <!--状态工具栏 -->
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
-                app:layout_collapseMode="pin"
                 android:paddingLeft="10dp"
                 android:paddingStart="10dp"
-                app:titleTextColor="@color/colorWhite"
+                app:layout_collapseMode="pin"
                 app:title="我的手环"
-                android:layout_gravity="center_horizontal">
+                app:titleTextColor="@color/colorWhite">
 
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>

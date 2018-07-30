@@ -1,38 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<com.lynn.wristband.view.ProgressFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="250dp"
+    android:background="@color/colorWhite"
+    app:themeWhite="true">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@color/colorWhite">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/progress_circle_blue"
-            android:layout_gravity="center"
-            />
+</com.lynn.wristband.view.ProgressFrameLayout>
 
-        <TextView
-            android:id="@+id/text_steps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0000"
-            android:textColor="@color/colorWhite"
-            android:textSize="30sp"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="6.8公里/2074千卡"
-            android:textColor="@color/colorWhite"
-            android:textSize="14sp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="80dp"
-            />
-
-    </FrameLayout>
-
-</LinearLayout>
