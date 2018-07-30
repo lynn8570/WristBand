@@ -18,7 +18,8 @@
             android:id="@+id/collapsing_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            android:minHeight="80dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="@android:color/transparent"
             app:titleEnabled="false">
 
@@ -28,13 +29,17 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_gravity="top"
                 android:layout_marginTop="15dp"
                 app:layout_collapseMode="pin"
+                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
+                app:titleTextColor="@color/colorWhite"
                 app:title="我的手环"
-                app:titleTextColor="@color/colorWhite"/>
+                android:layout_gravity="center_horizontal">
+
+            </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
