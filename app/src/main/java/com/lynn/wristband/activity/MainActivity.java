@@ -2,16 +2,13 @@ package com.lynn.wristband.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import com.lynn.wristband.R;
 import com.lynn.wristband.base.FullScreenBaseActivity;
-import com.lynn.wristband.fragment.ExcerciseFragment;
+import com.lynn.wristband.fragment.ExerciseFragment;
 import com.lynn.wristband.fragment.SettingsFragment;
 import com.lynn.wristband.fragment.StatusFragment;
 
@@ -52,7 +49,7 @@ public class MainActivity extends FullScreenBaseActivity {
     private void initFragment() {
         fragments = new ArrayList<>();
         fragments.add(new StatusFragment());
-        fragments.add(new ExcerciseFragment());
+        fragments.add(new ExerciseFragment());
         fragments.add(new SettingsFragment());
 
         rgMain.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

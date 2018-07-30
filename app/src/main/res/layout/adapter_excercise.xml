@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/text_excercise"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:drawableTop="@drawable/exercise_run"
+    android:text="锻炼"
+    android:gravity="center">
+
+</TextView>

@@ -1,6 +1,5 @@
 package com.lynn.wristband.adapter;
 
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +16,7 @@ public class RecyclerStatusAdapter extends RecyclerView.Adapter<RecyclerStatusAd
     @NonNull
     @Override
     public StatusViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.status_adapter, parent, false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_status, parent, false);
         StatusViewHolder holder = new StatusViewHolder(inflate);
         return holder;
     }

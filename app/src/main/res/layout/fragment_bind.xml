@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@color/colorWhite">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
         android:layout_weight="1"
         android:text="连接我的手环"
         android:textColor="@color/colorDark"
@@ -17,7 +17,6 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginRight="10dp"
         android:background="@drawable/btn_shape_blue"
         android:text="绑定"
         android:textColor="@color/colorWhite" />

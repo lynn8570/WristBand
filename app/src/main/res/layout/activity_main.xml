@@ -12,7 +12,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="220dp">
+        android:layout_height="wrap_content">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_layout"
@@ -29,6 +29,11 @@
                 android:background="@color/colorPrimary">
 
             </com.lynn.wristband.view.ProgressFrameLayout>
+            <include
+                layout="@layout/fragment_bind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom" />
 
             <!--状态工具栏 -->
 
