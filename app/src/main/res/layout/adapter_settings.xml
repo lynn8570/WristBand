@@ -11,7 +11,8 @@
        android:text="久坐提醒"
        android:id="@+id/text_settings"/>
 
-    <Button
+    <com.lynn.wristband.view.SwitchView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="24dp"
+        android:layout_margin="4dp"/>
 </LinearLayout>
