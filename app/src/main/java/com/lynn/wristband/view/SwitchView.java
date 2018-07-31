@@ -73,6 +73,8 @@ public class SwitchView extends View {
         super(context, attrs);
         setLayerType(LAYER_TYPE_SOFTWARE, null);
 
+//        final int DEFAULT_COLOR_PRIMARY = 0xFF4BD763;
+//        final int DEFAULT_COLOR_PRIMARY_DARK = 0xFF3AC652;
         final int DEFAULT_COLOR_PRIMARY = context.getResources().getColor(R.color.colorPrimary);
         final int DEFAULT_COLOR_PRIMARY_DARK = context.getResources().getColor(R.color.colorPrimaryDark);
 
