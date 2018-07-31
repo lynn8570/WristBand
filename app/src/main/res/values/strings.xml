@@ -29,4 +29,19 @@
         <item>@drawable/exercise_situp</item>
         <item>@drawable/exercise_boxing</item>
     </string-array>
+
+    <string-array name="settings_items">
+        <item>目标提醒</item>
+        <item>久坐提醒</item>
+        <item>喝水提醒</item>
+        <item>日程提醒</item>
+        <item>手环闹钟</item>
+        <item>来电提醒</item>
+        <item>短信提醒</item>
+        <item>App提醒</item>
+        <item>心率预警</item>
+        <item>手机解锁</item>
+        <item>遥控拍照</item>
+        <item>音乐播放</item>
+    </string-array>
 </resources>
