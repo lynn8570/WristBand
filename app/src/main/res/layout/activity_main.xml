@@ -19,16 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:minHeight="80dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:statusBarScrim="@android:color/transparent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:statusBarScrim="@color/colorPrimary"
             app:titleEnabled="false">
 
             <com.lynn.wristband.view.ProgressFrameLayout
+                android:id="@+id/progress_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary">
 
             </com.lynn.wristband.view.ProgressFrameLayout>
+
             <include
                 layout="@layout/fragment_bind"
                 android:layout_width="match_parent"
@@ -36,15 +38,15 @@
                 android:layout_gravity="bottom" />
 
             <!--状态工具栏 -->
-
+            <!--android:layout_marginTop="15dp"
+            status 是透明的，没有 layout_marginTop 就将透明的statusbar挡住了-->
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="10dp"
-                android:paddingStart="10dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center_horizontal"
+                android:paddingTop="10dp"
                 app:layout_collapseMode="pin"
                 app:title="我的手环"
                 app:titleTextColor="@color/colorWhite">
