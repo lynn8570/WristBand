@@ -67,7 +67,7 @@ public class MainActivity extends FullScreenBaseActivity {
                 int totalScrollRange = appBarLayout.getTotalScrollRange();
                 Log.i("linlian", "onOffsetChanged totalScrollRange=" + totalScrollRange);
                 Log.i("linlian", "onOffsetChanged verticalOffset=" + verticalOffset);
-                float alpha = 8 * Math.abs((float) verticalOffset) / (float) totalScrollRange;
+                float alpha =  Math.abs((float) verticalOffset) / (float) totalScrollRange;
                 Log.i("linlian", "onOffsetChanged alpha=" + alpha);
 
                 mToolbar.setAlpha(alpha);

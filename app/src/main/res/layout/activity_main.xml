@@ -18,7 +18,7 @@
             android:id="@+id/collapsing_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:minHeight="80dp"
+            android:minHeight="100dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:statusBarScrim="@color/colorPrimary"
             app:titleEnabled="false">
@@ -44,10 +44,11 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/colorPrimary"
-                android:gravity="center_horizontal"
                 android:paddingTop="10dp"
                 app:layout_collapseMode="pin"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="50dp"
+                android:background="@color/colorPrimary"
                 app:title="我的手环"
                 app:titleTextColor="@color/colorWhite">
 
